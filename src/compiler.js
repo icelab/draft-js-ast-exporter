@@ -129,6 +129,7 @@ function compiler (renderers = {}, config = {}) {
        */
       visitBlock (node, first, last) {
         const type = node[dataSchema.block.type]
+        const key = node[dataSchema.block.key]
         const entity = node[dataSchema.block.entity]
         const children = node[dataSchema.block.children]
 
@@ -137,7 +138,7 @@ function compiler (renderers = {}, config = {}) {
         const renderedChildren = children.map((child) => {
           return visit(child)
         })
-        let output = renderer(renderedChildren)
+        let output = renderer(key, renderedChildren)
 
         // If there are no children and we’re not allowing empty tags the
         // reset the output to nothing
@@ -206,13 +207,16 @@ function compiler (renderers = {}, config = {}) {
        */
       visitEntity (node, first, last) {
         const type = node[dataSchema.entity.type]
+        const key = node[dataSchema.entity.key]
         const mutability = node[dataSchema.entity.mutability]
         const data = node[dataSchema.entity.data]
         const children = node[dataSchema.entity.children]
         const renderer = getRendererForEntityType(renderers, type)
 
+
         return flatten(renderer(
           type,
+          key,
           mutability,
           data,
           children.map((child) => {
