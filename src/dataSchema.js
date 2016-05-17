@@ -7,7 +7,7 @@
 const schemaMapping = {
   block: {
     type: 0,
-    entity: 1,
+    key: 1,
     children: 2,
   },
   inline: {
@@ -16,9 +16,10 @@ const schemaMapping = {
   },
   entity: {
     type: 0,
-    mutability: 1,
-    data: 2,
-    children: 3,
+    key: 1,
+    mutability: 2,
+    data: 3,
+    children: 4,
   }
 }
 
