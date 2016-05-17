@@ -25,14 +25,15 @@ function processBlockContent (block) {
     let mutability = null
     let entity = entityKey ? Entity.get(entityKey) : null
     if (entity) {
-      type = entity.getType()
+      type = entity.getType().toLowerCase()
       mutability = entity.getMutability().toLowerCase()
-      data = entity.getData()[type]
+      data = entity.getData()
     }
     return [
       'entity',
       [
         type,
+        entityKey,
         mutability,
         data,
         // Map over the entity’s styles
