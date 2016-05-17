@@ -81,21 +81,11 @@ function processBlocks(blocks, context = []) {
     const type = block.getType()
     const key = block.getEntityAt(0)
 
-    if (type === 'atomic' && key) {
-      const entity = Entity.get(key)
-      let entityType = entity.getType()
-      entityData = [
-        entityType,
-        entity.getMutability().toLowerCase(),
-        entity.getData(),
-      ]
-    }
-
     const output = [
       'block',
       [
         type,
-        entityData,
+        key,
         processBlockContent(block)
       ]
     ]
