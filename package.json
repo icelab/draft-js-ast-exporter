@@ -1,7 +1,7 @@
 {
-  "name": "draft-js-exporter",
+  "name": "draft-js-ast-exporter",
   "version": "0.0.1",
-  "description": "A generic content exporter for draft-js.",
+  "description": "An abstract syntax tree exporter for draft-js.",
   "main": "lib/index.js",
   "scripts": {
     "build": "babel src --out-dir lib",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/icelab/draft-js-exporter.git"
+    "url": "https://github.com/icelab/draft-js-ast-exporter.git"
   },
   "keywords": [
     "draft-js",
@@ -27,14 +27,14 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/icelab/draft-js-exporter/issues"
+    "url": "https://github.com/icelab/draft-js-ast-exporter/issues"
   },
-  "homepage": "https://github.com/icelab/draft-js-exporter",
+  "homepage": "https://github.com/icelab/draft-js-ast-exporter",
   "dependencies": {
-    "draft-js-utils": "0.1.4"
+    "draft-js-utils": "^0.1.4"
   },
   "peerDependencies": {
-    "draft-js": ">=0.5.0"
+    "draft-js": ">=0.7.0"
   },
   "devDependencies": {
     "babel-cli": "6.7.5",
