@@ -79,7 +79,7 @@ function processBlocks(blocks, context = []) {
     let entityData = []
 
     const type = block.getType()
-    const key = block.getEntityAt(0)
+    const key = block.getKey()
 
     const output = [
       'block',
