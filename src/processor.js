@@ -17,38 +17,46 @@ function processBlockContent (block) {
   let charMetaList = block.getCharacterList()
   let entityPieces = getEntityRanges(text, charMetaList)
 
-  // TODO split this up into separate functions
   // Map over the block’s entities
-  return entityPieces.map(([entityKey, stylePieces]) => {
-    let data = []
-    let type = 'default'
-    let mutability = null
+  const entities = entityPieces.map(([entityKey, stylePieces]) => {
     let entity = entityKey ? Entity.get(entityKey) : null
-    if (entity) {
-      type = entity.getType().toLowerCase()
-      mutability = entity.getMutability().toLowerCase()
-      data = entity.getData()
-    }
-    return [
-      'entity',
-      [
-        type,
-        entityKey,
-        mutability,
-        data,
-        // Map over the entity’s styles
-        stylePieces.map(([text, style]) => {
-          return [
-            'inline',
-            [
-              style.toJS().map((s) => s.toLowerCase()),
-              text
-            ]
-          ]
-        })
+
+    // Extract the inline element
+    const inline = stylePieces.map(([text, style]) => {
+      return [
+        'inline',
+        [
+          style.toJS().map((s) => s),
+          text
+        ]
       ]
-    ]
+    })
+
+    // Nest within an entity if there’s data
+    if (entity) {
+      const type = entity.getType()
+      const mutability = entity.getMutability()
+      const data = entity.getData()
+      return [
+        [
+          'entity',
+          [
+            type,
+            entityKey,
+            mutability,
+            data,
+            inline
+          ]
+        ]
+      ]
+    } else {
+      return inline
+    }
   })
+  // Flatten the result
+  return entities.reduce(function(a, b) {
+    return a.concat(b);
+  }, [])
 }
 
 
