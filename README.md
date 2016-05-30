@@ -20,3 +20,7 @@ npm install --save draft-js-ast-exporter
 import exporter from 'draft-js-ast-exporter'
 const ast = exporter(editorState)
 ```
+
+## Output
+
+[A simple example of the AST output](docs/output.md) is included in the `docs`.
