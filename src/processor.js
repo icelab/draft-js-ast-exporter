@@ -8,8 +8,6 @@ import dataSchema from './dataSchema'
  * @param  {ContentBlock} block
  * @return {Array} List of block’s child nodes
  */
-function processBlockContent (block) {
-  let blockType = block.getType()
   let text = block.getText()
 
   // Cribbed from sstur’s implementation in draft-js-export-html
@@ -27,8 +25,8 @@ function processBlockContent (block) {
         'inline',
         [
           style.toJS().map((s) => s),
-          text
-        ]
+          text,
+        ],
       ]
     })
 
@@ -45,30 +43,30 @@ function processBlockContent (block) {
             entityKey,
             mutability,
             data,
-            inline
-          ]
-        ]
+            inline,
+          ],
+        ],
       ]
     } else {
       return inline
     }
   })
   // Flatten the result
-  return entities.reduce(function(a, b) {
-    return a.concat(b);
+  return entities.reduce((a, b) => {
+    return a.concat(b)
   }, [])
 }
-
 
 /**
  * Convert the content from a series of draft-js blocks into an abstract
  * syntax tree
  * @param  {Array} blocks
- * @param  {Array} context
+ * @param  {Object} options
  * @return {Array} An abstract syntax tree representing a draft-js content state
  */
-function processBlocks(blocks, context = []) {
+function processBlocks (blocks, options = {}) {
   // Track block context
+  let context = context || []
   let currentContext = context
   let lastBlock = null
   let lastProcessed = null
@@ -84,8 +82,6 @@ function processBlocks(blocks, context = []) {
    * children
    */
   function processBlock (block) {
-    let entityData = []
-
     const type = block.getType()
     const key = block.getKey()
 
@@ -94,8 +90,8 @@ function processBlocks(blocks, context = []) {
       [
         type,
         key,
-        processBlockContent(block)
-      ]
+        processBlockContent(block, options),
+      ],
     ]
 
     // Push into context (or not) based on depth. This means either the top-level
@@ -121,6 +117,5 @@ function processBlocks(blocks, context = []) {
 
   return context
 }
-
 
 export default processBlocks
