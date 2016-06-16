@@ -21,6 +21,27 @@ import exporter from 'draft-js-ast-exporter'
 const ast = exporter(editorState)
 ```
 
+### Entity modification
+
+You can modify the entity data as it’s being exported by passing in an `options.entityModifiers` object with a functions to modify that entity-type’s data:
+
+```js
+import exporter from 'draft-js-ast-exporter'
+const options = {
+  entityModifiers: {
+    'LINK': (data) => {
+      let copy = Object.assign({}, data)
+      // Strip protocols from `url` keys
+      copy.url = copy.url.replace(/^https?:/, '')
+      return copy
+    }
+  },
+}
+const ast = exporter(editorState, options)
+```
+
+This would be run for _every_ entity type of `LINK`.
+
 ## Output
 
 [A simple example of the AST output](docs/output.md) is included in the `docs`.
