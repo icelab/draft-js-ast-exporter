@@ -20,7 +20,7 @@ const schemaMapping = {
     mutability: 2,
     data: 3,
     children: 4,
-  }
+  },
 }
 
 export default schemaMapping

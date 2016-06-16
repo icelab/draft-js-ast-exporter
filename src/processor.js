@@ -6,10 +6,12 @@ import dataSchema from './dataSchema'
  * Process the content of a ContentBlock into appropriate abstract syntax tree
  * nodes based on their type
  * @param  {ContentBlock} block
+ * @param  {Object} options.entityModifier Map of functions for modifying entity
+ * data as it’s exported
  * @return {Array} List of block’s child nodes
  */
-function processBlockContent (block) {
-  let blockType = block.getType()
+function processBlockContent (block, options) {
+  const entityModifiers = options.entityModifiers || {}
   let text = block.getText()
 
   // Cribbed from sstur’s implementation in draft-js-export-html
@@ -27,8 +29,8 @@ function processBlockContent (block) {
         'inline',
         [
           style.toJS().map((s) => s),
-          text
-        ]
+          text,
+        ],
       ]
     })
 
@@ -36,7 +38,14 @@ function processBlockContent (block) {
     if (entity) {
       const type = entity.getType()
       const mutability = entity.getMutability()
-      const data = entity.getData()
+      let data = entity.getData()
+
+      // Run the entity data through a modifier if one exists
+      const modifier = entityModifiers[type]
+      if (modifier) {
+        data = modifier(data)
+      }
+
       return [
         [
           'entity',
@@ -45,30 +54,30 @@ function processBlockContent (block) {
             entityKey,
             mutability,
             data,
-            inline
-          ]
-        ]
+            inline,
+          ],
+        ],
       ]
     } else {
       return inline
     }
   })
   // Flatten the result
-  return entities.reduce(function(a, b) {
-    return a.concat(b);
+  return entities.reduce((a, b) => {
+    return a.concat(b)
   }, [])
 }
-
 
 /**
  * Convert the content from a series of draft-js blocks into an abstract
  * syntax tree
  * @param  {Array} blocks
- * @param  {Array} context
+ * @param  {Object} options
  * @return {Array} An abstract syntax tree representing a draft-js content state
  */
-function processBlocks(blocks, context = []) {
+function processBlocks (blocks, options = {}) {
   // Track block context
+  let context = context || []
   let currentContext = context
   let lastBlock = null
   let lastProcessed = null
@@ -84,8 +93,6 @@ function processBlocks(blocks, context = []) {
    * children
    */
   function processBlock (block) {
-    let entityData = []
-
     const type = block.getType()
     const key = block.getKey()
 
@@ -94,8 +101,8 @@ function processBlocks(blocks, context = []) {
       [
         type,
         key,
-        processBlockContent(block)
-      ]
+        processBlockContent(block, options),
+      ],
     ]
 
     // Push into context (or not) based on depth. This means either the top-level
@@ -121,6 +128,5 @@ function processBlocks(blocks, context = []) {
 
   return context
 }
-
 
 export default processBlocks
