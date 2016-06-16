@@ -6,8 +6,12 @@ import dataSchema from './dataSchema'
  * Process the content of a ContentBlock into appropriate abstract syntax tree
  * nodes based on their type
  * @param  {ContentBlock} block
+ * @param  {Object} options.entityModifier Map of functions for modifying entity
+ * data as it’s exported
  * @return {Array} List of block’s child nodes
  */
+function processBlockContent (block, options) {
+  const entityModifiers = options.entityModifiers || {}
   let text = block.getText()
 
   // Cribbed from sstur’s implementation in draft-js-export-html
@@ -34,7 +38,14 @@ import dataSchema from './dataSchema'
     if (entity) {
       const type = entity.getType()
       const mutability = entity.getMutability()
-      const data = entity.getData()
+      let data = entity.getData()
+
+      // Run the entity data through a modifier if one exists
+      const modifier = entityModifiers[type]
+      if (modifier) {
+        data = modifier(data)
+      }
+
       return [
         [
           'entity',
