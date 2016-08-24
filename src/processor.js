@@ -118,6 +118,8 @@ function processBlocks (blocks, options = {}) {
       let parent = parents[block.getDepth() - 1]
       currentContext = parent[dataSchema.block.children]
     } else if (block.getDepth() === 0) {
+      // Reset the parent context if we reach the top level
+      parents = []
       currentContext = context
     }
     currentContext.push(output)
