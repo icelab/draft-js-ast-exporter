@@ -9,6 +9,8 @@ import exporter from '../src'
 import content from './fixtures/content'
 import contentExported from './fixtures/content-exported'
 import contentExportedEntity from './fixtures/content-exported-entity'
+import depth from './fixtures/depth'
+import depthExported from './fixtures/depth-exported'
 
 test('it should export data', (nest) => {
   const contentState = convertFromRaw(content)
@@ -22,6 +24,7 @@ test('it should export data', (nest) => {
   })
 
   nest.test('... with entity modifications', (assert) => {
+
     // Simple modifiers to make URLs protocol-less
     const options = {
       entityModifiers: {
@@ -42,5 +45,13 @@ test('it should export data', (nest) => {
     assert.deepEqual(actual, expected, 'exported entity data is modified')
     assert.end()
   })
+})
 
+test('... handling depth correctly', (assert) => {
+  const contentState = convertFromRaw(depth)
+  const editorState = EditorState.createWithContent(contentState)
+  const actual = exporter(editorState)
+  const expected = depthExported
+  assert.deepEqual(actual, expected, 'exported data is an array')
+  assert.end()
 })

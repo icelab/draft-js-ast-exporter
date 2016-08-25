@@ -110,19 +110,22 @@ function processBlocks (blocks, options = {}) {
     // This block is deeper
     if (lastBlock && block.getDepth() > lastBlock.getDepth()) {
       // Extract reference object from flat context
-      parents.push(lastProcessed) // (mutating)
+      // parents.push(lastProcessed) // (mutating)
       currentContext = lastProcessed[dataSchema.block.children]
-    } else if (lastBlock && block.getDepth() < lastBlock.getDepth() && parents.length > 0) {
-      // This block is shallower, traverse up the set of parents
-      let parent = parents.pop() // (mutating)
+    } else if (lastBlock && block.getDepth() < lastBlock.getDepth() && block.getDepth() > 0) {
+      // This block is shallower (but not at the root). We want to find the last
+      // block that is one level shallower than this one to append it to
+      let parent = parents[block.getDepth() - 1]
       currentContext = parent[dataSchema.block.children]
-    }
-    // If there is no parent, we’re back at the top level
-    if (!currentContext) {
+    } else if (block.getDepth() === 0) {
+      // Reset the parent context if we reach the top level
+      parents = []
       currentContext = context
     }
     currentContext.push(output)
     lastProcessed = output[1]
+    // Store a reference to the last block at any given depth
+    parents[block.getDepth()] = lastProcessed
     lastBlock = block
   }
 
