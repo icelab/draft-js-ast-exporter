@@ -25,7 +25,8 @@ export default {
       "type": "header-two",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": []
+      "entityRanges": [],
+      "data": {}
     },
     {
       "key": "59kd9",
@@ -44,7 +45,8 @@ export default {
           "style": "ITALIC"
         }
       ],
-      "entityRanges": []
+      "entityRanges": [],
+      "data": {}
     },
     {
       "key": "bqjdr",
@@ -52,7 +54,8 @@ export default {
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": []
+      "entityRanges": [],
+      "data": {}
     },
     {
       "key": "1pdm1",
@@ -60,7 +63,8 @@ export default {
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": []
+      "entityRanges": [],
+      "data": {}
     },
     {
       "key": "1sd0p",
@@ -68,7 +72,8 @@ export default {
       "type": "ordered-list-item",
       "depth": 0,
       "inlineStyleRanges": [],
-      "entityRanges": []
+      "entityRanges": [],
+      "data": {}
     },
     {
       "key": "9vgd",
@@ -82,7 +87,8 @@ export default {
           "length": 1,
           "key": 0
         }
-      ]
+      ],
+      "data": {}
     },
     {
       "key": "kst0",
@@ -96,7 +102,8 @@ export default {
           "length": 6,
           "key": 1
         }
-      ]
+      ],
+      "data": {}
     }
   ]
 }
