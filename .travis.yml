@@ -4,7 +4,7 @@ node_js:
 - 4.6
 install:
 - npm install
-- npm install draft-js
+- npm install draft-js react react-dom
 notifications:
   email:
     on_success: change
