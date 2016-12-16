@@ -12,7 +12,8 @@ export default [
             "DraftJS AST Exporter"
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ],
   [
@@ -60,7 +61,8 @@ export default [
             ":"
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ],
   [
@@ -76,7 +78,8 @@ export default [
             "From draft-js internals"
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ],
   [
@@ -92,7 +95,8 @@ export default [
             "To an abstract syntax tree"
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ],
   [
@@ -108,7 +112,8 @@ export default [
             "Extensibility."
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ],
   [
@@ -140,7 +145,8 @@ export default [
             ]
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ],
   [
@@ -183,7 +189,8 @@ export default [
             "."
           ]
         ]
-      ]
+      ],
+      {}
     ]
   ]
 ]
