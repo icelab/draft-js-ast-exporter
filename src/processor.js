@@ -95,6 +95,7 @@ function processBlocks (blocks, options = {}) {
   function processBlock (block) {
     const type = block.getType()
     const key = block.getKey()
+    const data = (block.getData) ? block.getData().toJS() : {}
 
     const output = [
       'block',
@@ -102,6 +103,7 @@ function processBlocks (blocks, options = {}) {
         type,
         key,
         processBlockContent(block, options),
+        data,
       ],
     ]
 

@@ -8,7 +8,7 @@ export default {
       "depth": 0,
       "inlineStyleRanges": [],
       "entityRanges": [],
-      "data": {}
+      "data": { "alignment": "right" }
     },
     {
       "key": "9121g",

@@ -9,6 +9,7 @@ const schemaMapping = {
     type: 0,
     key: 1,
     children: 2,
+    data: 3,
   },
   inline: {
     styles: 0,
