@@ -55,3 +55,12 @@ test('... handling depth correctly', (assert) => {
   assert.deepEqual(actual, expected, 'exported data is an array')
   assert.end()
 })
+
+test('... handling block metadata', (assert) => {
+  const contentState = convertFromRaw(depth)
+  const editorState = EditorState.createWithContent(contentState)
+  const actual = exporter(editorState)[0][1][3]
+  const expected = depthExported[0][1][3]
+  assert.deepEqual(actual, expected, 'exported metadata matches')
+  assert.end()
+})
