@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# v0.0.4 2016-12-19
+
+### Added
+
+* Added support for block-level metadata (added in draft-js@0.8.0) — Thanks to [@corbanbrook](https://github.com/icelab/draft-js-ast-exporter/pull/5)!
+
 # v0.0.3 2016-08-26
 
 ### Fixed
