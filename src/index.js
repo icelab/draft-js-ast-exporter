@@ -8,11 +8,11 @@ import processBlocks from './processor'
  * @return {Array} An abstract syntax tree representing the draft-js editorState
  */
 function exporter (editorState, options = {}) {
-  // Retrieve the content
-  const content = editorState.getCurrentContent()
-  const blocks = content.getBlocksAsArray()
+  // Retrieve the content state and its blocks
+  const contentState = editorState.getCurrentContent()
+  const blocks = contentState.getBlocksAsArray()
   // Convert to an abstract syntax tree
-  return processBlocks(blocks, options)
+  return processBlocks(blocks, contentState, options)
 }
 
 export default exporter
