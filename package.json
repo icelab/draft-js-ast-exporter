@@ -1,6 +1,6 @@
 {
   "name": "draft-js-ast-exporter",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Export content from draft-js into an abstract syntax tree.",
   "main": "lib/index.js",
   "scripts": {
