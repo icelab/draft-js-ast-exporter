@@ -31,10 +31,10 @@
   },
   "homepage": "https://github.com/icelab/draft-js-ast-exporter",
   "dependencies": {
-    "draft-js-utils": "^0.1.4"
+    "draft-js-utils": "^0.1.7"
   },
   "peerDependencies": {
-    "draft-js": ">=0.8.0"
+    "draft-js": ">=0.10.0"
   },
   "devDependencies": {
     "babel-cli": "6.7.5",

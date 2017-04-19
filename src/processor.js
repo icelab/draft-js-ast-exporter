@@ -1,4 +1,3 @@
-import {Entity} from 'draft-js'
 import {getEntityRanges} from 'draft-js-utils'
 import dataSchema from './dataSchema'
 
@@ -6,11 +5,13 @@ import dataSchema from './dataSchema'
  * Process the content of a ContentBlock into appropriate abstract syntax tree
  * nodes based on their type
  * @param  {ContentBlock} block
+ * @param  {ContentState} contentState The draft-js ContentState object
+ *     containing this block
  * @param  {Object} options.entityModifier Map of functions for modifying entity
  * data as it’s exported
  * @return {Array} List of block’s child nodes
  */
-function processBlockContent (block, options) {
+function processBlockContent (block, contentState, options) {
   const entityModifiers = options.entityModifiers || {}
   let text = block.getText()
 
@@ -21,7 +22,7 @@ function processBlockContent (block, options) {
 
   // Map over the block’s entities
   const entities = entityPieces.map(([entityKey, stylePieces]) => {
-    let entity = entityKey ? Entity.get(entityKey) : null
+    let entity = entityKey ? contentState.getEntity(entityKey) : null
 
     // Extract the inline element
     const inline = stylePieces.map(([text, style]) => {
@@ -72,10 +73,12 @@ function processBlockContent (block, options) {
  * Convert the content from a series of draft-js blocks into an abstract
  * syntax tree
  * @param  {Array} blocks
+ * @param  {ContentState} contentState The draft-js ContentState object
+ *     containing the blocks
  * @param  {Object} options
  * @return {Array} An abstract syntax tree representing a draft-js content state
  */
-function processBlocks (blocks, options = {}) {
+function processBlocks (blocks, contentState, options = {}) {
   // Track block context
   let context = context || []
   let currentContext = context
@@ -102,7 +105,7 @@ function processBlocks (blocks, options = {}) {
       [
         type,
         key,
-        processBlockContent(block, options),
+        processBlockContent(block, contentState, options),
         data,
       ],
     ]
