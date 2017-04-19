@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# v2.0.0 2017-04-20
+
+* Add support for drat-js 0.10.0 entity API changes.
+
 # v1.0.0 2017-02-23
 
 * Releasing as v1.0.0 for better semver compatibility.
