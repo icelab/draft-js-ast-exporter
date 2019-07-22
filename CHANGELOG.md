@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# v2.0.1 2019-07-22
+
+* Add ESM entry point — [Thanks to @TrySound](https://github.com/icelab/draft-js-ast-exporter/pull/9)
+
 # v2.0.0 2017-04-20
 
 * Add support for drat-js 0.10.0 entity API changes.
