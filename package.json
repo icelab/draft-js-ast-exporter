@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/icelab/draft-js-ast-exporter",
   "dependencies": {
-    "draft-js-utils": "^0.1.7"
+    "draft-js-utils": "^1.4.0"
   },
   "peerDependencies": {
     "draft-js": ">=0.10.0"
